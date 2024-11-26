@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7019866-5fd7-488d-97a7-1e1ec3491991" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/Bank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/BankAtm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/BankOffice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/CreditAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/PaymentAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/AtmService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/BankOfficeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/BankService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/CreditAccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/EmployeeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/PaymentAccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/AtmServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/BankOfficeServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/BankServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/CreditAccountServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/PaymentAccountServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tech/reliab/course/ivanovda/bank/service/impl/UserServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="f7019866-5fd7-488d-97a7-1e1ec3491991" name="Changes" comment="lab1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +21,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -105,8 +79,17 @@
       <workItem from="1732527404638" duration="2569000" />
       <workItem from="1732562580498" duration="4306000" />
       <workItem from="1732608062970" duration="9290000" />
-      <workItem from="1732621542545" duration="54000" />
+      <workItem from="1732621542545" duration="274000" />
     </task>
+    <task id="LOCAL-00001" summary="lab1">
+      <option name="closed" value="true" />
+      <created>1732621625327</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732621625327</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +105,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lab1" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab1" />
   </component>
 </project>
