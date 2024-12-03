@@ -5,9 +5,12 @@ import tech.reliab.course.ivanovda.bank.entity.Employee;
 import tech.reliab.course.ivanovda.bank.service.EmployeeService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
-    private Employee employee;
+
+    private final List<Employee> employees = new ArrayList<>();
 
     @Override
     public void createEmployee(
@@ -22,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             double salary
     ) {
         // Создаём объект сотрудника
-        employee = new Employee(
+        Employee employee = new Employee(
                 id,
                 fullName,
                 dateOfBirth,
@@ -33,12 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 canIssueCredits,
                 salary
         );
+        employees.add(employee);
         System.out.println("Сотрудник создан: \n" + employee);
     }
 
     @Override
     public void displayEmployeeInfo(int id) {
-        if (employee != null && employee.getId() == id) {
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
             System.out.println(employee);
         } else {
             System.out.println("Сотрудник с ID " + id + " не найден.");
@@ -47,7 +52,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployeePosition(int id, String newPosition) {
-        if (employee != null && employee.getId() == id) {
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
             employee.setPosition(newPosition);
             System.out.println("Должность обновлена. Новая должность: " + newPosition);
         } else {
@@ -57,7 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployeeSalary(int id, double newSalary) {
-        if (employee != null && employee.getId() == id) {
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
             employee.setSalary(newSalary);
             System.out.println("Зарплата обновлена. Новая зарплата: " + newSalary);
         } else {
@@ -67,11 +74,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(int id) {
-        if (employee != null && employee.getId() == id) {
-            employee = null;
+        Employee employee = findEmployeeById(id);
+        if (employee != null) {
+            employees.remove(employee);
             System.out.println("Сотрудник с ID " + id + " удалён.");
         } else {
             System.out.println("Сотрудник с ID " + id + " не найден.");
         }
+    }
+
+    // Вспомогательный метод для поиска сотрудника по ID
+    private Employee findEmployeeById(int id) {
+        return employees.stream()
+                .filter(employee -> employee.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

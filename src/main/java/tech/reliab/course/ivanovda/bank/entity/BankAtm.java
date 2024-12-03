@@ -1,5 +1,12 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BankAtm {
     // id банкомата
     private int id;
@@ -24,107 +31,12 @@ public class BankAtm {
     // Стоимость обслуживания банкомата
     private double maintenanceCost;
 
-    // Конструктор
-    public BankAtm(int id, String name, String address, String status, Bank bank, boolean locatedInOffice,
-                   String servicingEmployee, boolean canDispenseCash, boolean canAcceptDeposits, double cashAmount,
-                   double maintenanceCost) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.status = status;
-        this.bank = bank;
-        this.locatedInOffice = locatedInOffice;
-        this.servicingEmployee = servicingEmployee;
-        this.canDispenseCash = canDispenseCash;
-        this.canAcceptDeposits = canAcceptDeposits;
-        this.cashAmount = cashAmount;
-        this.maintenanceCost = maintenanceCost;
-    }
-
-    // Геттеры
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public boolean isLocatedInOffice() {
-        return locatedInOffice;
-    }
-
-    public String getServicingEmployee() {
-        return servicingEmployee;
-    }
-
-    public boolean isCanDispenseCash() {
-        return canDispenseCash;
-    }
-
-    public boolean isCanAcceptDeposits() {
-        return canAcceptDeposits;
-    }
-
-    public double getCashAmount() {
-        return cashAmount;
-    }
-
-    public double getMaintenanceCost() {
-        return maintenanceCost;
-    }
-
-    // Сеттеры
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public void setStatus(String status) {
         if (status.equals("Работает") || status.equals("Не работает") || status.equals("Нет денег")) {
             this.status = status;
         } else {
             throw new IllegalArgumentException("Недопустимый статус. Допустимые значения: Работает, Не работает, Нет денег.");
         }
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public void setLocatedInOffice(boolean locatedInOffice) {
-        this.locatedInOffice = locatedInOffice;
-    }
-
-    public void setServicingEmployee(String servicingEmployee) {
-        this.servicingEmployee = servicingEmployee;
-    }
-
-    public void setCanDispenseCash(boolean canDispenseCash) {
-        this.canDispenseCash = canDispenseCash;
-    }
-
-    public void setCanAcceptDeposits(boolean canAcceptDeposits) {
-        this.canAcceptDeposits = canAcceptDeposits;
     }
 
     public void setCashAmount(double cashAmount) {

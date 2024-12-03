@@ -1,5 +1,11 @@
 package tech.reliab.course.ivanovda.bank.entity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BankOffice {
     // id офиса
     private int id;
@@ -24,79 +30,6 @@ public class BankOffice {
     // Стоимость аренды офиса
     private double rentCost;
 
-    // Конструктор
-    public BankOffice(int id, String name, String address, String status, boolean canPlaceAtm, int numberOfAtms,
-                      boolean canIssueLoans, boolean canDispenseCash, boolean canAcceptDeposits, double cashAmount, double rentCost) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.status = status;
-        this.canPlaceAtm = canPlaceAtm;
-        this.numberOfAtms = numberOfAtms;
-        this.canIssueLoans = canIssueLoans;
-        this.canDispenseCash = canDispenseCash;
-        this.canAcceptDeposits = canAcceptDeposits;
-        this.cashAmount = cashAmount;
-        this.rentCost = rentCost;
-    }
-
-    // Геттеры
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public boolean isCanPlaceAtm() {
-        return canPlaceAtm;
-    }
-
-    public int getNumberOfAtms() {
-        return numberOfAtms;
-    }
-
-    public boolean isCanIssueLoans() {
-        return canIssueLoans;
-    }
-
-    public boolean isCanDispenseCash() {
-        return canDispenseCash;
-    }
-
-    public boolean isCanAcceptDeposits() {
-        return canAcceptDeposits;
-    }
-
-    public double getCashAmount() {
-        return cashAmount;
-    }
-
-    public double getRentCost() {
-        return rentCost;
-    }
-
-    // Сеттеры
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public void setStatus(String status) {
         if (status.equals("Работает") || status.equals("Не работает")) {
@@ -106,28 +39,12 @@ public class BankOffice {
         }
     }
 
-    public void setCanPlaceAtm(boolean canPlaceAtm) {
-        this.canPlaceAtm = canPlaceAtm;
-    }
-
     public void setNumberOfAtms(int numberOfAtms) {
         if (numberOfAtms >= 0) {
             this.numberOfAtms = numberOfAtms;
         } else {
             throw new IllegalArgumentException("Количество банкоматов не может быть отрицательным.");
         }
-    }
-
-    public void setCanIssueLoans(boolean canIssueLoans) {
-        this.canIssueLoans = canIssueLoans;
-    }
-
-    public void setCanDispenseCash(boolean canDispenseCash) {
-        this.canDispenseCash = canDispenseCash;
-    }
-
-    public void setCanAcceptDeposits(boolean canAcceptDeposits) {
-        this.canAcceptDeposits = canAcceptDeposits;
     }
 
     public void setCashAmount(double cashAmount) {

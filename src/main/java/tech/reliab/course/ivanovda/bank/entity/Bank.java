@@ -1,7 +1,13 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
 import java.util.Random;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bank {
     // id банка
     private int id;
@@ -55,64 +61,6 @@ public class Bank {
             baseRate = baseRate * (100 - rating) / 100; // ставка уменьшается с увеличением рейтинга
         }
         return Math.min(baseRate, 20); // ограничение до 20%
-    }
-
-    // Геттеры
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getNumberOfOffices() {
-        return numberOfOffices;
-    }
-
-    public int getNumberOfATMs() {
-        return numberOfATMs;
-    }
-
-    public int getNumberOfEmployees() {
-        return numberOfEmployees;
-    }
-
-    public int getNumberOfClients() {
-        return numberOfClients;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public double getTotalCash() {
-        return totalCash;
-    }
-
-    public double getInterestRate() {
-        return interestRate;
-    }
-
-    // Сеттеры
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNumberOfOffices(int numberOfOffices) {
-        this.numberOfOffices = numberOfOffices;
-    }
-
-    public void setNumberOfATMs(int numberOfATMs) {
-        this.numberOfATMs = numberOfATMs;
-    }
-
-    public void setNumberOfEmployees(int numberOfEmployees) {
-        this.numberOfEmployees = numberOfEmployees;
-    }
-
-    public void setNumberOfClients(int numberOfClients) {
-        this.numberOfClients = numberOfClients;
     }
 
     public void setRating(int rating) {

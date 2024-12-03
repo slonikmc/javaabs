@@ -2,7 +2,13 @@ package tech.reliab.course.ivanovda.bank.entity;
 
 import java.time.LocalDate;
 import java.util.Random;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     // Id клиента
     private int id;
@@ -47,60 +53,6 @@ public class User {
         return (int) (monthlyIncome / 1000) * 100;
     }
 
-    // Геттеры
-    public int getId() {
-        return id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getWorkplace() {
-        return workplace;
-    }
-
-    public double getMonthlyIncome() {
-        return monthlyIncome;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public CreditAccount getCreditAccount() {
-        return creditAccount;
-    }
-
-    public PaymentAccount getPaymentAccount() {
-        return paymentAccount;
-    }
-
-    public int getCreditRating() {
-        return creditRating;
-    }
-
-    // Сеттеры
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
-    }
-
     public void setMonthlyIncome(double monthlyIncome) {
         if (monthlyIncome >= 0 && monthlyIncome <= 10000) {
             this.monthlyIncome = monthlyIncome;
@@ -108,21 +60,6 @@ public class User {
         } else {
             throw new IllegalArgumentException("Ежемесячный доход должен быть от 0 до 10 000.");
         }
-    }
-
-    // Устанавливаем банк
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    // Устанавливаем кредитный аккаунт
-    public void setCreditAccount(CreditAccount creditAccount) {
-        this.creditAccount = creditAccount;
-    }
-
-    // Устанавливаем платежный аккаунт
-    public void setPaymentAccount(PaymentAccount paymentAccount) {
-        this.paymentAccount = paymentAccount;
     }
 
     @Override

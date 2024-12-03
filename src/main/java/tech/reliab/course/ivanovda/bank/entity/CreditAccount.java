@@ -1,19 +1,36 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
 import java.time.LocalDate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreditAccount {
 
+    // id Аккаунта
     private int id;
+    // Клиент, чей аккаунт
     private User user;
+    // Банк, где зарегистрирован аккаунт
     private Bank bank;
+    // Дата начала кредита
     private LocalDate startDate;
+    // Дата конца кредита
     private LocalDate endDate;
+    // Сколько месяцев выплачивать
     private int creditMonths;
+    // Размер кредита
     private double creditAmount;
+    // Месячный платеж
     private double monthlyPayment;
+    // Ставка
     private double interestRate;
+    // Сотрудник
     private Employee employee;
+    // Связанный платежный счет
     private PaymentAccount paymentAccount;
 
     // Конструктор
@@ -45,64 +62,6 @@ public class CreditAccount {
         return (creditAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
     }
 
-    // Геттеры
-    public int getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public int getCreditMonths() {
-        return creditMonths;
-    }
-
-    public double getCreditAmount() {
-        return creditAmount;
-    }
-
-    public double getMonthlyPayment() {
-        return monthlyPayment;
-    }
-
-    public double getInterestRate() {
-        return interestRate;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public PaymentAccount getPaymentAccount() {
-        return paymentAccount;
-    }
-
-    // Сеттеры
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
         this.endDate = calculateEndDate(startDate, creditMonths);
@@ -126,14 +85,6 @@ public class CreditAccount {
         } else {
             throw new IllegalArgumentException("Процентная ставка не может быть отрицательной.");
         }
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public void setPaymentAccount(PaymentAccount paymentAccount) {
-        this.paymentAccount = paymentAccount;
     }
 
     @Override
