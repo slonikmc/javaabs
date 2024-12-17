@@ -1,67 +1,61 @@
 package tech.reliab.course.ivanovda.bank.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.reliab.course.ivanovda.bank.entity.User;
+import tech.reliab.course.ivanovda.bank.repository.UserRepository;
 import tech.reliab.course.ivanovda.bank.service.UserService;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
-    private final List<User> users = new ArrayList<>();
+    private final UserRepository userRepository;
 
-    @Override
-    public void createUser(int id, String name, LocalDate dateOfBirth, String job) {
-        User user = new User(
-                id,          // id
-                name,        // fullName
-                dateOfBirth, // dateOfBirth
-                job          // workplace
-        );
-        users.add(user);
-        System.out.println("Пользователь создан:\n" + user);
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void displayUserInfo(int id) {
-        User user = findUserById(id);
-        if (user != null) {
-            System.out.println(user);
-        } else {
-            System.out.println("Пользователь с ID " + id + " не найден.");
-        }
+    public void createUser(User user) {
+        userRepository.save(user);
+        System.out.println("Пользователь создан: " + user);
     }
 
     @Override
-    public void updateUser(int id, String name, LocalDate dateOfBirth, String job) {
-        User user = findUserById(id);
-        if (user != null) {
-            user.setFullName(name);
-            user.setDateOfBirth(dateOfBirth);
-            user.setWorkplace(job);
-            System.out.println("Данные пользователя обновлены:\n" + user);
-        } else {
-            System.out.println("Пользователь с ID " + id + " не найден.");
-        }
+    public User getUserById(int id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь с ID " + id + " не найден."));
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void updateUser(int id, User updatedUser) {
+        User existingUser = getUserById(id);
+        existingUser.setFullName(updatedUser.getFullName());
+        existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        existingUser.setWorkplace(updatedUser.getWorkplace());
+        existingUser.setMonthlyIncome(updatedUser.getMonthlyIncome());
+        existingUser.setBank(updatedUser.getBank());
+        existingUser.setCreditAccount(updatedUser.getCreditAccount());
+        existingUser.setPaymentAccount(updatedUser.getPaymentAccount());
+        userRepository.save(existingUser);
+        System.out.println("Пользователь обновлен: " + existingUser);
     }
 
     @Override
     public void deleteUser(int id) {
-        User user = findUserById(id);
-        if (user != null) {
-            users.remove(user);
-            System.out.println("Пользователь с ID " + id + " удалён.");
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            System.out.println("Пользователь с ID " + id + " удален.");
         } else {
             System.out.println("Пользователь с ID " + id + " не найден.");
         }
-    }
-
-    // Вспомогательный метод для поиска пользователя по ID
-    private User findUserById(int id) {
-        return users.stream()
-                .filter(user -> user.getId() == id)
-                .findFirst()
-                .orElse(null);
     }
 }

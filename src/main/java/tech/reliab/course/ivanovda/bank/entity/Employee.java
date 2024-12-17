@@ -1,5 +1,6 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,12 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "employees")
 public class Employee {
     // Id сотрудника
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // ФИО
     private String fullName;
@@ -18,6 +23,8 @@ public class Employee {
     // Должность
     private String position;
     // Банк, где работает сотрудник
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
     private Bank bank;
     // Работает ли удаленно
     private boolean worksRemotely;

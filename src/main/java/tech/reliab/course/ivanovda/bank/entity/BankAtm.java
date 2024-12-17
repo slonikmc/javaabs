@@ -1,4 +1,5 @@
 package tech.reliab.course.ivanovda.bank.entity;
+import jakarta.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,12 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "bank_atms")
 public class BankAtm {
     // id банкомата
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // Название банкомата
     private String name;
@@ -17,6 +22,8 @@ public class BankAtm {
     // Статус банкомата (работает/не работает/нет денег)
     private String status;
     // Банк, которому принадлежит банкомат
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
     private Bank bank;
     // Расположен ли банкомат в банковском офисе
     private boolean locatedInOffice;

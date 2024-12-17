@@ -1,5 +1,6 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +9,21 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "credit_accounts")
 public class CreditAccount {
 
     // id Аккаунта
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // Клиент, чей аккаунт
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     // Банк, где зарегистрирован аккаунт
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
     private Bank bank;
     // Дата начала кредита
     private LocalDate startDate;
@@ -29,8 +38,12 @@ public class CreditAccount {
     // Ставка
     private double interestRate;
     // Сотрудник
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
     // Связанный платежный счет
+    @ManyToOne
+    @JoinColumn(name = "payment_account_id")
     private PaymentAccount paymentAccount;
 
     // Конструктор

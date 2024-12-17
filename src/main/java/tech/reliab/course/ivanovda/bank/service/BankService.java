@@ -1,69 +1,18 @@
 package tech.reliab.course.ivanovda.bank.service;
 
 import tech.reliab.course.ivanovda.bank.entity.Bank;
+
 import java.util.List;
 
 public interface BankService {
 
-    /**
-     * Создает новый банк с заданным идентификатором и именем.
-     *
-     * @param id    идентификатор банка
-     * @param name  название банка
-     * @return новый экземпляр банка
-     */
-    Bank createBank(int id, String name);
+    List<Bank> getAllBanks();  // Получить все банки
 
-    /**
-     * Возвращает информацию о текущем банке.
-     *
-     * @return объект банка
-     */
-    Bank getBank();
+    Bank getBankById(int id);  // Получить банк по ID
 
-    /**
-     * Обновляет имя банка.
-     *
-     * @param name новое имя банка
-     */
-    void updateBankName(String name);
+    Bank createBank(Bank bank);  // Создать новый банк
 
-    /**
-     * Обновляет рейтинг банка.
-     *
-     * @param rating новый рейтинг банка
-     */
-    void updateBankRating(int rating);
+    Bank updateBank(int id, Bank bank);  // Обновить информацию о банке
 
-    /**
-     * Обновляет общую сумму наличных в банке.
-     *
-     * @param totalCash новая сумма наличных
-     */
-    void updateTotalCash(double totalCash);
-
-    /**
-     * Увеличивает количество офисов банка на 1.
-     */
-    void incrementOffices();
-
-    /**
-     * Увеличивает количество банкоматов банка на 1.
-     */
-    void incrementATMs();
-
-    /**
-     * Увеличивает количество сотрудников банка на 1.
-     */
-    void incrementEmployees();
-
-    /**
-     * Увеличивает количество клиентов банка на 1.
-     */
-    void incrementClients();
-
-    /**
-     * Выводит полную информацию о банке.
-     */
-    void displayBankInfo();
+    boolean deleteBank(int id);  // Удалить банк
 }

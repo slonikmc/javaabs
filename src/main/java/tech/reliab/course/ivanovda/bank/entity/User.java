@@ -1,5 +1,6 @@
 package tech.reliab.course.ivanovda.bank.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Random;
 import lombok.Data;
@@ -9,24 +10,39 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
     // Id клиента
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // ФИО
+    @Column(name = "full_name", nullable = false)
     private String fullName;
     // Дата рождения
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
     // Место работы
+    @Column(name = "workplace")
     private String workplace;
     // Ежемесячный доход
+    @Column(name = "monthly_income", nullable = false)
     private double monthlyIncome;
     // Банк, которым пользуется
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
     private Bank bank;
     // Кредитный счет
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "credit_account_id")
     private CreditAccount creditAccount;
     // Платежный счет
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_account_id")
     private PaymentAccount paymentAccount;
     // Кредитный рейтинг
+    @Column(name = "credit_rating", nullable = false)
     private int creditRating;
 
     // Конструктор

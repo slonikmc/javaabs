@@ -1,14 +1,23 @@
 package tech.reliab.course.ivanovda.bank.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.reliab.course.ivanovda.bank.entity.Bank;
 import tech.reliab.course.ivanovda.bank.entity.BankAtm;
+import tech.reliab.course.ivanovda.bank.repository.AtmRepository;
 import tech.reliab.course.ivanovda.bank.service.AtmService;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AtmServiceImpl implements AtmService {
-    private final List<BankAtm> atmList = new ArrayList<>();
+
+    private final AtmRepository atmRepository;
+
+    @Autowired
+    public AtmServiceImpl(AtmRepository atmRepository) {
+        this.atmRepository = atmRepository;
+    }
 
     @Override
     public void createAtm(int id, String name, String address, String status, Bank bank, boolean locatedInOffice,
@@ -16,15 +25,16 @@ public class AtmServiceImpl implements AtmService {
                           double cashAmount, double maintenanceCost) {
         BankAtm atm = new BankAtm(id, name, address, status, bank, locatedInOffice, servicingEmployee,
                 canDispenseCash, canAcceptDeposits, cashAmount, maintenanceCost);
-        atmList.add(atm);
+        atmRepository.save(atm);
         System.out.println("Банкомат создан: " + atm);
     }
 
     @Override
     public void updateStatus(int id, String newStatus) {
-        BankAtm atm = findAtmById(id);
+        BankAtm atm = atmRepository.findById(id).orElse(null);
         if (atm != null) {
             atm.setStatus(newStatus);
+            atmRepository.save(atm);
             System.out.println("Статус банкомата обновлен: " + atm.getStatus());
         } else {
             System.out.println("Банкомат с ID " + id + " не найден.");
@@ -33,9 +43,10 @@ public class AtmServiceImpl implements AtmService {
 
     @Override
     public void updateCashAmount(int id, double newCashAmount) {
-        BankAtm atm = findAtmById(id);
+        BankAtm atm = atmRepository.findById(id).orElse(null);
         if (atm != null) {
             atm.setCashAmount(newCashAmount);
+            atmRepository.save(atm);
             System.out.println("Количество денег в банкомате обновлено: " + atm.getCashAmount());
         } else {
             System.out.println("Банкомат с ID " + id + " не найден.");
@@ -44,9 +55,10 @@ public class AtmServiceImpl implements AtmService {
 
     @Override
     public void updateMaintenanceCost(int id, double newMaintenanceCost) {
-        BankAtm atm = findAtmById(id);
+        BankAtm atm = atmRepository.findById(id).orElse(null);
         if (atm != null) {
             atm.setMaintenanceCost(newMaintenanceCost);
+            atmRepository.save(atm);
             System.out.println("Стоимость обслуживания банкомата обновлена: " + atm.getMaintenanceCost());
         } else {
             System.out.println("Банкомат с ID " + id + " не найден.");
@@ -55,34 +67,33 @@ public class AtmServiceImpl implements AtmService {
 
     @Override
     public void displayAtmInfo() {
+        List<BankAtm> atmList = atmRepository.findAll();
         if (atmList.isEmpty()) {
             System.out.println("Банкоматы отсутствуют.");
         } else {
             System.out.println("Список банкоматов:");
-            for (BankAtm atm : atmList) {
-                System.out.println(atm);
-            }
+            atmList.forEach(System.out::println);
         }
     }
 
     @Override
     public void deleteAtm(int id) {
-        BankAtm atm = findAtmById(id);
-        if (atm != null) {
-            atmList.remove(atm);
+        if (atmRepository.existsById(id)) {
+            atmRepository.deleteById(id);
             System.out.println("Банкомат с ID " + id + " удалён.");
         } else {
             System.out.println("Банкомат с ID " + id + " не найден.");
         }
     }
 
-    // Вспомогательный метод для поиска банкомата по ID
-    private BankAtm findAtmById(int id) {
-        for (BankAtm atm : atmList) {
-            if (atm.getId() == id) {
-                return atm;
-            }
-        }
-        return null;
+    @Override
+    public List<BankAtm> getAllAtms() {
+        return atmRepository.findAll();
     }
+
+    @Override
+    public BankAtm getAtmById(int id) {
+        return atmRepository.findById(id).orElse(null);
+    }
+
 }

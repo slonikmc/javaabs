@@ -1,4 +1,5 @@
 package tech.reliab.course.ivanovda.bank.entity;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -6,8 +7,12 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "bank_offices")
 public class BankOffice {
     // id офиса
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // Имя отделеления
     private String name;

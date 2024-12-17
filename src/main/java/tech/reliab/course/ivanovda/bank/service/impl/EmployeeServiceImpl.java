@@ -1,93 +1,65 @@
 package tech.reliab.course.ivanovda.bank.service.impl;
 
-import tech.reliab.course.ivanovda.bank.entity.Bank;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.reliab.course.ivanovda.bank.entity.Employee;
+import tech.reliab.course.ivanovda.bank.repository.EmployeeRepository;
 import tech.reliab.course.ivanovda.bank.service.EmployeeService;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final List<Employee> employees = new ArrayList<>();
+    private final EmployeeRepository employeeRepository;
 
-    @Override
-    public void createEmployee(
-            int id,
-            String fullName,
-            LocalDate dateOfBirth,
-            String position,
-            Bank bank,
-            boolean worksRemotely,
-            String bankOffice,
-            boolean canIssueCredits,
-            double salary
-    ) {
-        // Создаём объект сотрудника
-        Employee employee = new Employee(
-                id,
-                fullName,
-                dateOfBirth,
-                position,
-                bank,
-                worksRemotely,
-                bankOffice,
-                canIssueCredits,
-                salary
-        );
-        employees.add(employee);
-        System.out.println("Сотрудник создан: \n" + employee);
+    @Autowired
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
-    public void displayEmployeeInfo(int id) {
-        Employee employee = findEmployeeById(id);
-        if (employee != null) {
-            System.out.println(employee);
+    public void createEmployee(Employee employee) {
+        employeeRepository.save(employee);
+        System.out.println("Сотрудник создан: " + employee);
+    }
+
+    @Override
+    public void updateEmployee(int id, Employee updatedEmployee) {
+        if (employeeRepository.existsById(id)) {
+            Employee employee = employeeRepository.findById(id).get();
+            employee.setFullName(updatedEmployee.getFullName());
+            employee.setDateOfBirth(updatedEmployee.getDateOfBirth());
+            employee.setPosition(updatedEmployee.getPosition());
+            employee.setBank(updatedEmployee.getBank());
+            employee.setWorksRemotely(updatedEmployee.isWorksRemotely());
+            employee.setBankOffice(updatedEmployee.getBankOffice());
+            employee.setCanIssueCredits(updatedEmployee.isCanIssueCredits());
+            employee.setSalary(updatedEmployee.getSalary());
+            employeeRepository.save(employee);
+            System.out.println("Данные сотрудника обновлены: " + employee);
         } else {
             System.out.println("Сотрудник с ID " + id + " не найден.");
         }
     }
 
     @Override
-    public void updateEmployeePosition(int id, String newPosition) {
-        Employee employee = findEmployeeById(id);
-        if (employee != null) {
-            employee.setPosition(newPosition);
-            System.out.println("Должность обновлена. Новая должность: " + newPosition);
-        } else {
-            System.out.println("Сотрудник с ID " + id + " не найден.");
-        }
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 
     @Override
-    public void updateEmployeeSalary(int id, double newSalary) {
-        Employee employee = findEmployeeById(id);
-        if (employee != null) {
-            employee.setSalary(newSalary);
-            System.out.println("Зарплата обновлена. Новая зарплата: " + newSalary);
-        } else {
-            System.out.println("Сотрудник с ID " + id + " не найден.");
-        }
+    public Employee getEmployeeById(int id) {
+        return employeeRepository.findById(id).orElse(null);
     }
 
     @Override
     public void deleteEmployee(int id) {
-        Employee employee = findEmployeeById(id);
-        if (employee != null) {
-            employees.remove(employee);
+        if (employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
             System.out.println("Сотрудник с ID " + id + " удалён.");
         } else {
             System.out.println("Сотрудник с ID " + id + " не найден.");
         }
-    }
-
-    // Вспомогательный метод для поиска сотрудника по ID
-    private Employee findEmployeeById(int id) {
-        return employees.stream()
-                .filter(employee -> employee.getId() == id)
-                .findFirst()
-                .orElse(null);
     }
 }

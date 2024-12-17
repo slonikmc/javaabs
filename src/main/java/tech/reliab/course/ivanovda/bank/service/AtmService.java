@@ -61,6 +61,10 @@ public interface AtmService {
      * @param id идентификатор банкомата
      */
     void deleteAtm(int id);
+
+    List<BankAtm> getAllAtms();
+
+    BankAtm getAtmById(int id);
 }
 
 

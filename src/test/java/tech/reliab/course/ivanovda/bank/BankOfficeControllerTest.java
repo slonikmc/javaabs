@@ -1,4 +1,4 @@
-package tech.reliab.course.ivanivda.bank;
+package tech.reliab.course.ivanovda.bank;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
