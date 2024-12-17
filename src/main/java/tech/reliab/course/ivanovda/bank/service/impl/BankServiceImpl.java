@@ -52,6 +52,7 @@ public class BankServiceImpl implements BankService {
             bankRepository.deleteById(id);
             return true;
         }
+
         return false;
     }
 }
